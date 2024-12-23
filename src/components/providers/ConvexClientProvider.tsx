@@ -11,6 +11,6 @@ function ConvexClientProvider({ children }: { children: React.ReactNode }) {
                 {children}
             </ConvexProviderWithClerk>
         </ClerkProvider>
-    )
-}
-export default ConvexClientProvider
+    );
+};
+export default ConvexClientProvider;
