@@ -52,7 +52,7 @@ http.route({
             const name = `${first_name} ${last_name}`.trim();
 
             try {
-                // save user to db
+                await ctx
             } catch (error) {
                 return new Response("Error creating user", { status: 500 });
             }
