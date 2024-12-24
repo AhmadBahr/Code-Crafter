@@ -1,9 +1,11 @@
-import React from 'react'
+import { currentUser } from "@clerk/nextjs/server";
+import { ConvexHttpClient } from "convex/browser";
 
-const Header = () => {
-    return (
-        <div>Header</div>
-    )
+async function Header() {
+    const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
+    const user = await currentUser();
+
+    return <div>Header</div>
 }
 
 export default Header
