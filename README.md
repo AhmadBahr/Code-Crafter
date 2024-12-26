@@ -1,4 +1,11 @@
-<h1 align="center">✨ SaaS Code Editor - Next.js 15 ✨</h1>
+# Code Editor
+
+## Table of Contents
+1. [**General Info**](#general-info)
+2. [**Technologies Used**](#technologies-used)
+3. [**Setup**](#setup)
+4. [**Features**](#features) 
+5. [**Code & Snippets**](#codesnippets)
 
 ![Demo App](/public/screenshot-for-readme.png)
 
