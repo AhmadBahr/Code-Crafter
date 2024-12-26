@@ -74,8 +74,8 @@
 *   User Authentication (using Clerk): Allows users to log in and access the code editor securely.
    ## Code & Snippets
 *   Monaco Editor Example:
-*   components/CodeEditor.tsx
+    components/CodeEditor.tsx
 *   Convex Function Example:
-*   lib/convex/functions/executeCode.js
+    lib/convex/functions/executeCode.js
 *   Webhook Handler Example:
-*   pages/api/webhooks/svix.ts
+    pages/api/webhooks/svix.ts
