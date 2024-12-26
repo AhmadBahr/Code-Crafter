@@ -41,6 +41,7 @@
 *   ESLint: A JavaScript linting tool that helps identify and fix code style and potential errors.
 *   Type Checking:
 *   TypeScript: A superset of JavaScript that adds static type checking for improved code maintainability and reliability.
+* Lemon Squeezy: A platform for managing subscriptions, invoicing, and customer relationships
 ## Highlights
 *   🚀 Tech Stack: Next.js 15 + Convex + Clerk + TypeScript
 *   💻 Online IDE with Multi-Language Support: Supports 10+ programming languages.
