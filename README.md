@@ -10,39 +10,72 @@
 ![Demo App](/public/screenshot-for-readme.png)
 
 
-Highlights:
+## General Info
+*   Project Description: A concise summary of the code editor project, including its purpose and key objectives.
+*   Purpose: The primary goal or intended use of the code editor (e.g., for learning, for specific programming languages, for collaboration).
 
-- 🚀 Tech stack: Next.js 15 + Convex + Clerk + TypeScript
-- 💻 Online IDE with multi-language support (10 languages)
-- 🎨 Customizable experience with 5 VSCode themes
-- ✨ Smart output handling with Success & Error states
-- 💎 Flexible pricing with Free & Pro plans
-- 🤝 Community-driven code sharing system
-- 🔍 Advanced filtering & search capabilities
-- 👤 Personal profile with execution history tracking
-- 📊 Comprehensive statistics dashboard
-- ⚙️ Customizable font size controls
-- 🔗 Webhook integration support
-- 🌟 Professional deployment walkthrough
+# Technologies Used:
 
-### Setup .env file
-
-```js
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
-CLERK_SECRET_KEY=
-CONVEX_DEPLOYMENT=
-NEXT_PUBLIC_CONVEX_URL=
-```
-
-### Add these env to Convex Dashboard
-
-```js
-CLERK_WEBHOOK_SECRET=
-LEMON_SQUEEZY_WEBHOOK_SECRET=
-```
-
-### Run the app
-
-```shell
-npm run dev
-```
+*   Frontend:
+*   React: A JavaScript library for building user interfaces.
+*   Next.js: A React framework that enables server-side rendering and other features for building web applications.
+*   Tailwind CSS: A utility-first CSS framework that provides pre-built CSS classes for rapid styling.
+*   Framer Motion: A motion library for React that simplifies the creation of animations and interactions.
+*   Monaco Editor: A powerful code editor component, originally developed by Microsoft for Visual Studio Code.
+*   React Syntax Highlighter: A library for syntax highlighting code within your React application.
+*   Lucide React: A collection of SVG icons for use in React projects.
+*   Backend:
+*   Convex: A serverless platform that provides data storage and functions for building backend logic.
+*   svix: A library for handling webhooks (for integrations).
+*   State Management:
+*   Zustand: A lightweight state management library for React.
+*   Styling:
+*   Tailwind CSS: (As mentioned above)
+*   UI Library:
+*   Clerk: A user authentication and authorization platform for web applications.
+*   Notifications:
+*   React Hot Toast: A library for displaying user notifications (e.g., success, error, loading).
+*   Build Tool:
+*   Next.js: (As mentioned above) - Also used for building and optimizing the application for production.
+*    Linting:
+*   ESLint: A JavaScript linting tool that helps identify and fix code style and potential errors.
+*   Type Checking:
+*   TypeScript: A superset of JavaScript that adds static type checking for improved code maintainability and reliability.
+## Highlights
+*   🚀 Tech Stack: Next.js 15 + Convex + Clerk + TypeScript
+*   💻 Online IDE with Multi-Language Support: Supports 10+ programming languages.
+*   🎨 Customizable Experience: Choose from 5 popular VS Code themes.
+*   ✨ Smart Output Handling: Clear visual cues for Success and Error states.
+*   💎 Flexible Pricing: Offers both Free and Pro plans to suit various needs.
+*   🤝 Community-Driven Code Sharing System: Easily share and discover code snippets from other users.
+*   🔍 Advanced Filtering & Search Capabilities: Quickly find the code you need.
+*   👤 Personal Profile: Track your execution history for easy reference.
+*   📊 Comprehensive Statistics Dashboard: Gain insights into your coding activity.
+*   ⚙️ Customizable Font Size Controls: Adjust the font size for optimal readability.
+*   🔗 Webhook Integration Support: Integrate with external services for automated workflows.
+  # Setup
+  Prerequisites: Software and tools required before setting up the project (e.g., Node.js, npm or yarn).
+*   Installation: Steps involved in installing project dependencies and setting up the development environment.
+*   Development Server: Instructions for starting the development server to run and test the code editor locally.
+*   Building for Production: Steps for building the project for deployment to a production environment (e.g., optimization, minification).
+*  Environment Setup:
+*   Create a .env file in your project root and add the following variables:
+*   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY= (from Clerk)
+*   CLERK_SECRET_KEY= (from Clerk)
+*   CONVEX_DEPLOYMENT= (from your Convex deployment)
+*   NEXT_PUBLIC_CONVEX_URL= (from your Convex deployment)
+*   In your Convex Dashboard, add the following environment variables:
+*   CLERK_WEBHOOK_SECRET= (for Clerk webhook integration)
+*   LEMON_SQUEEZY_WEBHOOK_SECRET= (for Lemon Squeezy webhook integration, if applicable)
+*   Run the development server: npm run dev (Nextjs) and npm convex dev (convex)
+  ## Features
+*  Code Editing with Syntax Highlighting: Core functionality of the editor, enabling users to write code and see it with proper syntax coloring.
+*   (List specific features here - e.g., Autocomplete: Suggests code completions as the user types, Code Formatting: Automatically formats code according to defined rules, Debugging: Tools for finding and fixing errors in the code.)
+*   User Authentication (using Clerk): Allows users to log in and access the code editor securely.
+   ## Code & Snippets
+*   Monaco Editor Example:
+*   components/CodeEditor.tsx
+*   Convex Function Example:
+*   lib/convex/functions/executeCode.js
+*   Webhook Handler Example:
+*   pages/api/webhooks/svix.ts
