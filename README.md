@@ -30,7 +30,7 @@
 *   State Management:
 *   Zustand: A lightweight state management library for React.
 *   Styling:
-*   Tailwind CSS: (As mentioned above)
+*   Piston API: A cloud-based API for executing code in various programming languages.
 *   UI Library:
 *   Clerk: A user authentication and authorization platform for web applications.
 *   Notifications:
@@ -70,7 +70,7 @@
 *   Run the development server: npm run dev (Nextjs) and npm convex dev (convex)
   ## Features
 *  Code Editing with Syntax Highlighting: Core functionality of the editor, enabling users to write code and see it with proper syntax coloring.
-*   (List specific features here - e.g., Autocomplete: Suggests code completions as the user types, Code Formatting: Automatically formats code according to defined rules, Debugging: Tools for finding and fixing errors in the code.)
+*    Multi-Language Support: Allows users to submit code in various programming languages (e.g., Python, JavaScript, C++, Java) and receive the output.
 *   User Authentication (using Clerk): Allows users to log in and access the code editor securely.
    ## Code & Snippets
 *   Monaco Editor Example:
