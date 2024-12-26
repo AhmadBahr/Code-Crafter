@@ -1,3 +1,4 @@
+
 import { httpRouter } from "convex/server";
 import { httpAction } from "./_generated/server";
 import { Webhook } from "svix";
@@ -34,7 +35,7 @@ http.route({
                 });
 
                 if (success) {
-                    // optionally send an email message
+                    // optionally do anything here
                 }
             }
 
