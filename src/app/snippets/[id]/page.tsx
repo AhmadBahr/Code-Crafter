@@ -4,7 +4,7 @@ import { useQuery } from "convex/react";
 import { useParams } from "next/navigation";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
-import SnippetLoadingSkeleton from "./_components/snippetLoadingSkeleton";
+import SnippetLoadingSkeleton from "./_components/SnippetLoadingSkeleton";
 import NavigationHeader from "@/components/NavigationHeader";
 import { Clock, Code, MessageSquare, User } from "lucide-react";
 import { Editor } from "@monaco-editor/react";

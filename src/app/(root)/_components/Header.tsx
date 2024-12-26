@@ -35,7 +35,7 @@ async function Header() {
                         {/* Logo */}
                         <div
                             className="relative bg-gradient-to-br from-[#1a1a2e] to-[#0a0a0f] p-2 rounded-xl ring-1
-                        ring-white/10 group-hover:ring-white/20 transition-all"
+              ring-white/10 group-hover:ring-white/20 transition-all"
                         >
                             <Blocks className="size-6 text-blue-400 transform -rotate-6 group-hover:rotate-0 transition-transform duration-500" />
                         </div>
@@ -64,7 +64,7 @@ async function Header() {
                             <Code2 className="w-4 h-4 relative z-10 group-hover:rotate-3 transition-transform" />
                             <span
                                 className="text-sm font-medium relative z-10 group-hover:text-white
-                    transition-colors"
+                 transition-colors"
                             >
                                 Snippets
                             </span>

@@ -1,4 +1,3 @@
-
 import { Check } from "lucide-react";
 
 const FeatureItem = ({ children }: { children: React.ReactNode }) => (
