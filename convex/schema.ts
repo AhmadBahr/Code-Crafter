@@ -39,8 +39,7 @@ export default defineSchema({
         userId: v.string(),
         snippetId: v.id("snippets"),
     })
-
         .index("by_user_id", ["userId"])
         .index("by_snippet_id", ["snippetId"])
         .index("by_user_id_and_snippet_id", ["userId", "snippetId"]),
-})
+});
