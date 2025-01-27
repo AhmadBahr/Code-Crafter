@@ -29,22 +29,16 @@
   ## Backend:
   
 *   Convex: A serverless platform that provides data storage and functions for building backend logic.
-*   svix: A library for handling webhooks (for integrations).
-*   State Management:
+*   Svix: A library for handling webhooks (for integrations).
 *   Zustand: A lightweight state management library for React.
-*   Styling:
 *   Piston API: A cloud-based API for executing code in various programming languages.
-*   UI Library:
 *   Clerk: A user authentication and authorization platform for web applications.
-*   Notifications:
 *   React Hot Toast: A library for displaying user notifications (e.g., success, error, loading).
-*   Build Tool:
 *   Next.js: (As mentioned above) - Also used for building and optimizing the application for production.
-*    Linting:
 *   ESLint: A JavaScript linting tool that helps identify and fix code style and potential errors.
-*   Type Checking:
 *   TypeScript: A superset of JavaScript that adds static type checking for improved code maintainability and reliability.
-* Lemon Squeezy: A platform for managing subscriptions, invoicing, and customer relationships
+*   Lemon Squeezy: A platform for managing subscriptions, invoicing, and customer relationships.
+  
 ## Highlights
 *   🚀 Tech Stack: Next.js 15 + Convex + Clerk + TypeScript
 *   💻 Online IDE with Multi-Language Support: Supports 10+ programming languages.
@@ -57,8 +51,11 @@
 *   📊 Comprehensive Statistics Dashboard: Gain insights into your coding activity.
 *   ⚙️ Customizable Font Size Controls: Adjust the font size for optimal readability.
 *   🔗 Webhook Integration Support: Integrate with external services for automated workflows.
-  # Setup
-  Prerequisites: Software and tools required before setting up the project (e.g., Node.js, npm or yarn).
+  
+  # Setup:
+  
+  ## Prerequisites: 
+  Software and tools required before setting up the project (e.g., Node.js, npm or yarn).
 *   Installation: Steps involved in installing project dependencies and setting up the development environment.
 *   Development Server: Instructions for starting the development server to run and test the code editor locally.
 *   Building for Production: Steps for building the project for deployment to a production environment (e.g., optimization, minification).
@@ -72,10 +69,12 @@
 *   CLERK_WEBHOOK_SECRET= (for Clerk webhook integration)
 *   LEMON_SQUEEZY_WEBHOOK_SECRET= (for Lemon Squeezy webhook integration, if applicable)
 *   Run the development server: npm run dev (Nextjs) and npm convex dev (convex)
+* 
   ## Features
 *  Code Editing with Syntax Highlighting: Core functionality of the editor, enabling users to write code and see it with proper syntax coloring.
 *    Multi-Language Support: Allows users to submit code in various programming languages (e.g., Python, JavaScript, C++, Java) and receive the output.
 *   User Authentication (using Clerk): Allows users to log in and access the code editor securely.
+  
    ## Code & Snippets
 *   Monaco Editor Example:
     components/CodeEditor.tsx
