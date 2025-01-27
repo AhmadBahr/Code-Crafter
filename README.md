@@ -25,8 +25,8 @@
 *   Monaco Editor: A powerful code editor component, originally developed by Microsoft for Visual Studio Code.
 *   React Syntax Highlighter: A library for syntax highlighting code within your React application.
 *   Lucide React: A collection of SVG icons for use in React projects.
-*   
-   ## Backend:
+  
+  ## Backend:
   
 *   Convex: A serverless platform that provides data storage and functions for building backend logic.
 *   svix: A library for handling webhooks (for integrations).
