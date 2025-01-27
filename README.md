@@ -16,7 +16,8 @@
 
 # Technologies Used:
 
-*   Frontend:
+## Frontend:
+
 *   React: A JavaScript library for building user interfaces.
 *   Next.js: A React framework that enables server-side rendering and other features for building web applications.
 *   Tailwind CSS: A utility-first CSS framework that provides pre-built CSS classes for rapid styling.
@@ -24,7 +25,9 @@
 *   Monaco Editor: A powerful code editor component, originally developed by Microsoft for Visual Studio Code.
 *   React Syntax Highlighter: A library for syntax highlighting code within your React application.
 *   Lucide React: A collection of SVG icons for use in React projects.
-*   Backend:
+*   
+   ## Backend:
+  
 *   Convex: A serverless platform that provides data storage and functions for building backend logic.
 *   svix: A library for handling webhooks (for integrations).
 *   State Management:
