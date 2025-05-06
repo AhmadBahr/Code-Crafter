@@ -77,7 +77,44 @@
   
    ## Code & Snippets
 *   Monaco Editor Example:
-    components/CodeEditor.tsx
+
+import React, { useRef, useEffect } from 'react';
+import Editor, { Monaco } from '@monaco-editor/react';
+
+type CodeEditorProps = {
+  language: string;
+  value: string;
+  onChange: (value: string | undefined) => void;
+};
+
+const CodeEditor: React.FC<CodeEditorProps> = ({ language, value, onChange }) => {
+  const editorRef = useRef(null);
+
+  function handleEditorDidMount(editor: any, monaco: Monaco) {
+    editorRef.current = editor;
+  }
+
+  return (
+    <div className="h-full w-full rounded border">
+      <Editor
+        height="500px"
+        defaultLanguage={language}
+        defaultValue={value}
+        onMount={handleEditorDidMount}
+        onChange={onChange}
+        theme="vs-dark"
+        options={{
+          minimap: { enabled: false },
+          fontSize: 14,
+          automaticLayout: true,
+        }}
+      />
+    </div>
+  );
+};
+
+export default CodeEditor;
+
 *   Convex Function Example:
     lib/convex/functions/executeCode.js
 *   Webhook Handler Example:
