@@ -1,25 +1,22 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import ConvexClientProvider from "@/components/providers/ConvexClientProvider";
-import Footer from "@/components/Footer";
-import { Toaster } from "react-hot-toast";
+import { ConvexClientProvider } from "@/components/providers/convex-client-provider";
+import { Toaster } from "sonner";
+import { NavigationHeader } from "@/components/navigation-header";
+import ErrorBoundary from "./(root)/_components/ErrorBoundary";
+import { ToastProvider } from "./(root)/_components/ToastContext";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Code Craft",
-  description: "Share and run code snippets",
+  title: "Code Crafter - Online Code Editor",
+  description: "A modern online code editor with real-time execution and collaboration features.",
+  keywords: ["code editor", "online IDE", "programming", "collaboration", "real-time execution"],
+  authors: [{ name: "Code Crafter Team" }],
+  viewport: "width=device-width, initial-scale=1",
+  robots: "index, follow",
 };
 
 export default function RootLayout({
@@ -29,15 +26,21 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gradient-to-b from-gray-900 to-gray-950 text-gray-100 flex flex-col`}
-        >
-          <ConvexClientProvider>{children}</ConvexClientProvider>
-
-          <Footer />
-
-          <Toaster />
+      <html lang="en" suppressHydrationWarning>
+        <body className={inter.className}>
+          <ErrorBoundary>
+            <ConvexClientProvider>
+              <ToastProvider>
+                <div className="h-full flex flex-col">
+                  <NavigationHeader />
+                  <main className="flex-1 h-full overflow-hidden">
+                    {children}
+                  </main>
+                </div>
+                <Toaster />
+              </ToastProvider>
+            </ConvexClientProvider>
+          </ErrorBoundary>
         </body>
       </html>
     </ClerkProvider>

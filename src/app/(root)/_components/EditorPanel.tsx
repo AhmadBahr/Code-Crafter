@@ -1,22 +1,38 @@
 "use client";
 import { useCodeEditorStore } from "@/store/useCodeEditorStore";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { defineMonacoThemes, LANGUAGE_CONFIG } from "../_constants";
 import { Editor } from "@monaco-editor/react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { RotateCcwIcon, ShareIcon, TypeIcon } from "lucide-react";
+import { RotateCcwIcon, ShareIcon, TypeIcon, SaveIcon } from "lucide-react";
 import { useClerk } from "@clerk/nextjs";
 import { EditorPanelSkeleton } from "./EditorPanelSkeleton";
 import useMounted from "@/hooks/useMounted";
 import ShareSnippetDialog from "./ShareSnippetDialog";
+import toast from "react-hot-toast";
 
 function EditorPanel() {
     const clerk = useClerk();
     const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
+    const [isSaving, setIsSaving] = useState(false);
     const { language, theme, fontSize, editor, setFontSize, setEditor } = useCodeEditorStore();
 
     const mounted = useMounted();
+
+    const saveCode = useCallback(async () => {
+        if (!editor) return;
+        try {
+            setIsSaving(true);
+            const code = editor.getValue();
+            localStorage.setItem(`editor-code-${language}`, code);
+            toast.success("Code saved successfully");
+        } catch (error) {
+            toast.error("Failed to save code");
+        } finally {
+            setIsSaving(false);
+        }
+    }, [editor, language]);
 
     useEffect(() => {
         const savedCode = localStorage.getItem(`editor-code-${language}`);
@@ -29,10 +45,23 @@ function EditorPanel() {
         if (savedFontSize) setFontSize(parseInt(savedFontSize));
     }, [setFontSize]);
 
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                saveCode();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [saveCode]);
+
     const handleRefresh = () => {
         const defaultCode = LANGUAGE_CONFIG[language].defaultCode;
         if (editor) editor.setValue(defaultCode);
         localStorage.removeItem(`editor-code-${language}`);
+        toast.success("Code reset to default");
     };
 
     const handleEditorChange = (value: string | undefined) => {
@@ -45,7 +74,7 @@ function EditorPanel() {
         localStorage.setItem("editor-font-size", size.toString());
     };
 
-    if (!mounted) return null;
+    if (!mounted) return <EditorPanelSkeleton />;
 
     return (
         <div className="relative">
@@ -90,23 +119,37 @@ function EditorPanel() {
                             <RotateCcwIcon className="size-4 text-gray-400" />
                         </motion.button>
 
+                        <motion.button
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={saveCode}
+                            disabled={isSaving}
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg overflow-hidden bg-gradient-to-r
+                                from-emerald-500 to-emerald-600 opacity-90 hover:opacity-100 transition-opacity disabled:opacity-50"
+                        >
+                            <SaveIcon className="size-4 text-white" />
+                            <span className="text-sm font-medium text-white">
+                                {isSaving ? "Saving..." : "Save"}
+                            </span>
+                        </motion.button>
+
                         {/* Share Button */}
                         <motion.button
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             onClick={() => setIsShareDialogOpen(true)}
                             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg overflow-hidden bg-gradient-to-r
-               from-blue-500 to-blue-600 opacity-90 hover:opacity-100 transition-opacity"
+                                from-blue-500 to-blue-600 opacity-90 hover:opacity-100 transition-opacity"
                         >
                             <ShareIcon className="size-4 text-white" />
-                            <span className="text-sm font-medium text-white ">Share</span>
+                            <span className="text-sm font-medium text-white">Share</span>
                         </motion.button>
                     </div>
                 </div>
 
                 {/* Editor  */}
                 <div className="relative group rounded-xl overflow-hidden ring-1 ring-white/[0.05]">
-                    {clerk.loaded && (
+                    {clerk.loaded ? (
                         <Editor
                             height="600px"
                             language={LANGUAGE_CONFIG[language].monacoLanguage}
@@ -134,15 +177,25 @@ function EditorPanel() {
                                     verticalScrollbarSize: 8,
                                     horizontalScrollbarSize: 8,
                                 },
+                                quickSuggestions: true,
+                                suggestOnTriggerCharacters: true,
+                                acceptSuggestionOnEnter: "on",
+                                tabCompletion: "on",
+                                wordBasedSuggestions: true,
+                                parameterHints: {
+                                    enabled: true,
+                                    cycle: true,
+                                },
                             }}
                         />
+                    ) : (
+                        <EditorPanelSkeleton />
                     )}
-
-                    {!clerk.loaded && <EditorPanelSkeleton />}
                 </div>
             </div>
             {isShareDialogOpen && <ShareSnippetDialog onClose={() => setIsShareDialogOpen(false)} />}
         </div>
     );
 }
+
 export default EditorPanel;

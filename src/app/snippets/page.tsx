@@ -2,19 +2,23 @@
 
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import SnippetsPageSkeleton from "./_components/SnippetsPageSkeleton";
 import NavigationHeader from "@/components/NavigationHeader";
-
 import { AnimatePresence, motion } from "framer-motion";
-import { BookOpen, Code, Grid, Layers, Search, Tag, X } from "lucide-react";
+import { BookOpen, Code, Grid, Layers, Search, Tag, X, ArrowUpDown, Star, Clock } from "lucide-react";
 import SnippetCard from "./_components/SnippetCard";
+import { useDebounce } from "@/hooks/useDebounce";
+
+type SortOption = "newest" | "oldest" | "popular";
 
 function SnippetsPage() {
     const snippets = useQuery(api.snippets.getSnippets);
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
     const [view, setView] = useState<"grid" | "list">("grid");
+    const [sortBy, setSortBy] = useState<SortOption>("newest");
+    const debouncedSearch = useDebounce(searchQuery, 300);
 
     // loading state
     if (snippets === undefined) {
@@ -26,19 +30,34 @@ function SnippetsPage() {
         );
     }
 
-    const languages = [...new Set(snippets.map((s) => s.language))];
-    const popularLanguages = languages.slice(0, 5);
+    const languages = useMemo(() => [...new Set(snippets.map((s) => s.language))], [snippets]);
+    const popularLanguages = useMemo(() => languages.slice(0, 5), [languages]);
 
-    const filteredSnippets = snippets.filter((snippet) => {
-        const matchesSearch =
-            snippet.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            snippet.language.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            snippet.userName.toLowerCase().includes(searchQuery.toLowerCase());
+    const filteredSnippets = useMemo(() => {
+        return snippets
+            .filter((snippet) => {
+                const matchesSearch =
+                    snippet.title.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+                    snippet.language.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+                    snippet.userName.toLowerCase().includes(debouncedSearch.toLowerCase());
 
-        const matchesLanguage = !selectedLanguage || snippet.language === selectedLanguage;
+                const matchesLanguage = !selectedLanguage || snippet.language === selectedLanguage;
 
-        return matchesSearch && matchesLanguage;
-    });
+                return matchesSearch && matchesLanguage;
+            })
+            .sort((a, b) => {
+                switch (sortBy) {
+                    case "newest":
+                        return b.createdAt - a.createdAt;
+                    case "oldest":
+                        return a.createdAt - b.createdAt;
+                    case "popular":
+                        return (b.starCount || 0) - (a.starCount || 0);
+                    default:
+                        return 0;
+                }
+            });
+    }, [snippets, debouncedSearch, selectedLanguage, sortBy]);
 
     return (
         <div className="min-h-screen bg-[#0a0a0f]">
@@ -51,7 +70,7 @@ function SnippetsPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r
-             from-blue-500/10 to-purple-500/10 text-sm text-gray-400 mb-6"
+                            from-blue-500/10 to-purple-500/10 text-sm text-gray-400 mb-6"
                     >
                         <BookOpen className="w-4 h-4" />
                         Community Code Library
@@ -87,8 +106,8 @@ function SnippetsPage() {
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search snippets by title, language, or author..."
                                 className="w-full pl-12 pr-4 py-4 bg-[#1e1e2e]/80 hover:bg-[#1e1e2e] text-white
-                  rounded-xl border border-[#313244] hover:border-[#414155] transition-all duration-200
-                  placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                                    rounded-xl border border-[#313244] hover:border-[#414155] transition-all duration-200
+                                    placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
                             />
                         </div>
                     </div>
@@ -105,12 +124,12 @@ function SnippetsPage() {
                                 key={lang}
                                 onClick={() => setSelectedLanguage(lang === selectedLanguage ? null : lang)}
                                 className={`
-                    group relative px-3 py-1.5 rounded-lg transition-all duration-200
-                    ${selectedLanguage === lang
+                                    group relative px-3 py-1.5 rounded-lg transition-all duration-200
+                                    ${selectedLanguage === lang
                                         ? "text-blue-400 bg-blue-500/10 ring-2 ring-blue-500/50"
                                         : "text-gray-400 hover:text-gray-300 bg-[#1e1e2e] hover:bg-[#262637] ring-1 ring-gray-800"
                                     }
-                  `}
+                                `}
                             >
                                 <div className="flex items-center gap-2">
                                     <img src={`/${lang}.png`} alt={lang} className="w-4 h-4 object-contain" />
@@ -130,6 +149,32 @@ function SnippetsPage() {
                         )}
 
                         <div className="ml-auto flex items-center gap-3">
+                            {/* Sort Options */}
+                            <div className="flex items-center gap-1 p-1 bg-[#1e1e2e] rounded-lg ring-1 ring-gray-800">
+                                <button
+                                    onClick={() => setSortBy("newest")}
+                                    className={`p-2 rounded-md transition-all flex items-center gap-1 ${
+                                        sortBy === "newest"
+                                            ? "bg-blue-500/20 text-blue-400"
+                                            : "text-gray-400 hover:text-gray-300 hover:bg-[#262637]"
+                                    }`}
+                                    title="Sort by newest"
+                                >
+                                    <Clock className="w-4 h-4" />
+                                </button>
+                                <button
+                                    onClick={() => setSortBy("popular")}
+                                    className={`p-2 rounded-md transition-all flex items-center gap-1 ${
+                                        sortBy === "popular"
+                                            ? "bg-blue-500/20 text-blue-400"
+                                            : "text-gray-400 hover:text-gray-300 hover:bg-[#262637]"
+                                    }`}
+                                    title="Sort by popularity"
+                                >
+                                    <Star className="w-4 h-4" />
+                                </button>
+                            </div>
+
                             <span className="text-sm text-gray-500">
                                 {filteredSnippets.length} snippets found
                             </span>
@@ -139,18 +184,20 @@ function SnippetsPage() {
                                 <button
                                     onClick={() => setView("grid")}
                                     className={`p-2 rounded-md transition-all ${view === "grid"
-                                            ? "bg-blue-500/20 text-blue-400"
-                                            : "text-gray-400 hover:text-gray-300 hover:bg-[#262637]"
+                                        ? "bg-blue-500/20 text-blue-400"
+                                        : "text-gray-400 hover:text-gray-300 hover:bg-[#262637]"
                                         }`}
+                                    title="Grid view"
                                 >
                                     <Grid className="w-4 h-4" />
                                 </button>
                                 <button
                                     onClick={() => setView("list")}
                                     className={`p-2 rounded-md transition-all ${view === "list"
-                                            ? "bg-blue-500/20 text-blue-400"
-                                            : "text-gray-400 hover:text-gray-300 hover:bg-[#262637]"
+                                        ? "bg-blue-500/20 text-blue-400"
+                                        : "text-gray-400 hover:text-gray-300 hover:bg-[#262637]"
                                         }`}
+                                    title="List view"
                                 >
                                     <Layers className="w-4 h-4" />
                                 </button>
@@ -162,8 +209,8 @@ function SnippetsPage() {
                 {/* Snippets Grid */}
                 <motion.div
                     className={`grid gap-6 ${view === "grid"
-                            ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-                            : "grid-cols-1 max-w-3xl mx-auto"
+                        ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                        : "grid-cols-1 max-w-3xl mx-auto"
                         }`}
                     layout
                 >
@@ -174,7 +221,7 @@ function SnippetsPage() {
                     </AnimatePresence>
                 </motion.div>
 
-                {/* edge case: empty state */}
+                {/* Empty State */}
                 {filteredSnippets.length === 0 && (
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
@@ -182,10 +229,8 @@ function SnippetsPage() {
                         className="relative max-w-md mx-auto mt-20 p-8 rounded-2xl overflow-hidden"
                     >
                         <div className="text-center">
-                            <div
-                                className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br 
-                from-blue-500/10 to-purple-500/10 ring-1 ring-white/10 mb-6"
-                            >
+                            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br 
+                                from-blue-500/10 to-purple-500/10 ring-1 ring-white/10 mb-6">
                                 <Code className="w-8 h-8 text-gray-400" />
                             </div>
                             <h3 className="text-xl font-medium text-white mb-3">No snippets found</h3>
@@ -202,7 +247,7 @@ function SnippetsPage() {
                                         setSelectedLanguage(null);
                                     }}
                                     className="inline-flex items-center gap-2 px-4 py-2 bg-[#262637] text-gray-300 hover:text-white rounded-lg 
-                    transition-colors"
+                                        transition-colors"
                                 >
                                     <X className="w-4 h-4" />
                                     Clear all filters
@@ -215,4 +260,5 @@ function SnippetsPage() {
         </div>
     );
 }
+
 export default SnippetsPage;
