@@ -2,13 +2,13 @@
 
 A modern, feature-rich online code editor with multi-language support, real-time execution, and collaborative features.
 
-![Next.js](https://img.shields.io/badge/Next.js-14.1.0-black?style=for-the-badge&logo=next.js&logoColor=white)
-![React](https://img.shields.io/badge/React-18.2.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript&logoColor=white)
-![Convex](https://img.shields.io/badge/Convex-1.17.4-00D4AA?style=for-the-badge&logo=convex&logoColor=white)
-![Clerk](https://img.shields.io/badge/Clerk-Auth-6C47FF?style=for-the-badge&logo=clerk&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.1-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Monaco Editor](https://img.shields.io/badge/Monaco_Editor-0.52.2-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+![Next.js](https://badge.io/badge/Next.js/14.1.0/black?logo=next.js)
+![React](https://badge.io/badge/React/18.2.0/61DAFB?logo=react)
+![TypeScript](https://badge.io/badge/TypeScript/5.0/blue?logo=typescript)
+![Convex](https://badge.io/badge/Convex/1.17.4/00D4AA?logo=convex)
+![Clerk](https://badge.io/badge/Clerk/Auth/6C47FF?logo=clerk)
+![Tailwind CSS](https://badge.io/badge/Tailwind_CSS/3.4.1/38B2AC?logo=tailwind-css)
+![Monaco Editor](https://badge.io/badge/Monaco_Editor/0.52.2/007ACC?logo=monaco-editor)
 
 ![Demo App](/public/screenshot-for-readme.png)
 
