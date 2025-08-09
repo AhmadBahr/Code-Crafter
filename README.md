@@ -1,121 +1,228 @@
-# Code Editor
+# Code-Crafter - Online Code Editor
 
-## Table of Contents
-1. [**General Info**](#general-info)
-2. [**Technologies Used**](#technologies-used)
-3. [**Setup**](#setup)
-4. [**Features**](#features) 
-5. [**Code & Snippets**](#codesnippets)
+A modern, feature-rich online code editor with multi-language support, real-time execution, and collaborative features.
+
+![Next.js](https://img.shields.io/badge/Next.js-14.1.0-black?style=for-the-badge&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-18.2.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript&logoColor=white)
+![Convex](https://img.shields.io/badge/Convex-1.17.4-00D4AA?style=for-the-badge&logo=convex&logoColor=white)
+![Clerk](https://img.shields.io/badge/Clerk-Auth-6C47FF?style=for-the-badge&logo=clerk&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.1-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Monaco Editor](https://img.shields.io/badge/Monaco_Editor-0.52.2-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 
 ![Demo App](/public/screenshot-for-readme.png)
 
+## ✨ Features
 
-## General Info
-*   Project Description: A concise summary of the code editor project, including its purpose and key objectives.
-*   Purpose: The primary goal or intended use of the code editor (e.g., for learning, for specific programming languages, for collaboration).
+- 💻 **Multi-Language Support** - Write and execute code in 10+ programming languages
+- 🎨 **Customizable Themes** - Choose from 5 popular VS Code themes
+- ⚡ **Real-Time Execution** - Run code instantly with Piston API integration
+- 👤 **User Authentication** - Secure login with Clerk authentication
+- 📊 **Code Analytics** - Track execution history and statistics
+- 🔗 **Code Sharing** - Share and discover code snippets with the community
+- ⭐ **Star System** - Like and save your favorite code snippets
+- 💬 **Comments** - Discuss and collaborate on code snippets
+- 📱 **Responsive Design** - Works seamlessly on all devices
+- 🎯 **Pro Features** - Advanced languages and features for premium users
 
-# Technologies Used:
+## 🚀 Quick Start
 
-## Frontend:
+### Prerequisites
+- Node.js (v18+)
+- npm or yarn
+- Convex account
+- Clerk account
 
-*   React: A JavaScript library for building user interfaces.
-*   Next.js: A React framework that enables server-side rendering and other features for building web applications.
-*   Tailwind CSS: A utility-first CSS framework that provides pre-built CSS classes for rapid styling.
-*   Framer Motion: A motion library for React that simplifies the creation of animations and interactions.
-*   Monaco Editor: A powerful code editor component, originally developed by Microsoft for Visual Studio Code.
-*   React Syntax Highlighter: A library for syntax highlighting code within your React application.
-*   Lucide React: A collection of SVG icons for use in React projects.
-  
-  ## Backend:
-  
-*   Convex: A serverless platform that provides data storage and functions for building backend logic.
-*   Svix: A library for handling webhooks (for integrations).
-*   Zustand: A lightweight state management library for React.
-*   Piston API: A cloud-based API for executing code in various programming languages.
-*   Clerk: A user authentication and authorization platform for web applications.
-*   React Hot Toast: A library for displaying user notifications (e.g., success, error, loading).
-*   Next.js: (As mentioned above) - Also used for building and optimizing the application for production.
-*   ESLint: A JavaScript linting tool that helps identify and fix code style and potential errors.
-*   TypeScript: A superset of JavaScript that adds static type checking for improved code maintainability and reliability.
-*   Lemon Squeezy: A platform for managing subscriptions, invoicing, and customer relationships.
-  
-## Highlights
-*   🚀 Tech Stack: Next.js 15 + Convex + Clerk + TypeScript
-*   💻 Online IDE with Multi-Language Support: Supports 10+ programming languages.
-*   🎨 Customizable Experience: Choose from 5 popular VS Code themes.
-*   ✨ Smart Output Handling: Clear visual cues for Success and Error states.
-*   💎 Flexible Pricing: Offers both Free and Pro plans to suit various needs.
-*   🤝 Community-Driven Code Sharing System: Easily share and discover code snippets from other users.
-*   🔍 Advanced Filtering & Search Capabilities: Quickly find the code you need.
-*   👤 Personal Profile: Track your execution history for easy reference.
-*   📊 Comprehensive Statistics Dashboard: Gain insights into your coding activity.
-*   ⚙️ Customizable Font Size Controls: Adjust the font size for optimal readability.
-*   🔗 Webhook Integration Support: Integrate with external services for automated workflows.
-  
-  # Setup:
-  
-  ## Prerequisites: 
-  Software and tools required before setting up the project (e.g., Node.js, npm or yarn).
-*   Installation: Steps involved in installing project dependencies and setting up the development environment.
-*   Development Server: Instructions for starting the development server to run and test the code editor locally.
-*   Building for Production: Steps for building the project for deployment to a production environment (e.g., optimization, minification).
-*  Environment Setup:
-*   Create a .env file in your project root and add the following variables:
-*   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY= (from Clerk)
-*   CLERK_SECRET_KEY= (from Clerk)
-*   CONVEX_DEPLOYMENT= (from your Convex deployment)
-*   NEXT_PUBLIC_CONVEX_URL= (from your Convex deployment)
-*   In your Convex Dashboard, add the following environment variables:
-*   CLERK_WEBHOOK_SECRET= (for Clerk webhook integration)
-*   LEMON_SQUEEZY_WEBHOOK_SECRET= (for Lemon Squeezy webhook integration, if applicable)
-*   Run the development server: npm run dev (Nextjs) and npm convex dev (convex)
-* 
-  ## Features
-*  Code Editing with Syntax Highlighting: Core functionality of the editor, enabling users to write code and see it with proper syntax coloring.
-*    Multi-Language Support: Allows users to submit code in various programming languages (e.g., Python, JavaScript, C++, Java) and receive the output.
-*   User Authentication (using Clerk): Allows users to log in and access the code editor securely.
-  
-   ## Code & Snippets
-*   Monaco Editor Example:
+### Environment Setup
+Create a `.env.local` file in your project root:
+```bash
+# Clerk Authentication
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
 
-import React, { useRef, useEffect } from 'react';
-import Editor, { Monaco } from '@monaco-editor/react';
+# Convex Backend
+CONVEX_DEPLOYMENT=your_convex_deployment_url
+NEXT_PUBLIC_CONVEX_URL=your_convex_url
 
-type CodeEditorProps = {
-  language: string;
-  value: string;
-  onChange: (value: string | undefined) => void;
-};
+# Webhook Secrets (in Convex Dashboard)
+CLERK_WEBHOOK_SECRET=your_clerk_webhook_secret
+LEMON_SQUEEZY_WEBHOOK_SECRET=your_lemon_squeezy_webhook_secret
+```
 
-const CodeEditor: React.FC<CodeEditorProps> = ({ language, value, onChange }) => {
-  const editorRef = useRef(null);
+### Installation
+```bash
+# Clone the repository
+git clone <repository-url>
+cd Code-Crafter
 
-  function handleEditorDidMount(editor: any, monaco: Monaco) {
-    editorRef.current = editor;
-  }
+# Install dependencies
+npm install
 
-  return (
-    <div className="h-full w-full rounded border">
-      <Editor
-        height="500px"
-        defaultLanguage={language}
-        defaultValue={value}
-        onMount={handleEditorDidMount}
-        onChange={onChange}
-        theme="vs-dark"
-        options={{
-          minimap: { enabled: false },
-          fontSize: 14,
-          automaticLayout: true,
-        }}
-      />
-    </div>
-  );
-};
+# Start the development server
+npm run dev
 
-export default CodeEditor;
+# In another terminal, start Convex
+npx convex dev
+```
 
-*   Convex Function Example:
-    lib/convex/functions/executeCode.js
-*   Webhook Handler Example:
-    pages/api/webhooks/svix.ts
+Visit `http://localhost:3000` to see the application.
+
+## 🛠️ Tech Stack
+
+**Frontend:**
+- Next.js 14.1.0 - React framework with App Router
+- React 18.2.0 - UI library
+- TypeScript 5.0 - Type safety
+- Tailwind CSS 3.4.1 - Utility-first CSS framework
+- Monaco Editor 0.52.2 - Code editor component
+- Framer Motion 11.15.0 - Animation library
+- Zustand 5.0.2 - State management
+- Lucide React 0.469.0 - Icon library
+
+**Backend:**
+- Convex 1.17.4 - Serverless backend platform
+- Clerk 6.9.6 - Authentication and user management
+- Piston API - Code execution engine
+- Lemon Squeezy - Subscription management
+
+**Development:**
+- ESLint - Code linting
+- PostCSS - CSS processing
+- React Hot Toast - Notifications
+
+## 📁 Project Structure
+
+```
+Code-Crafter/
+├── convex/                    # Convex backend functions
+│   ├── codeExecutions.ts     # Code execution logic
+│   ├── snippets.ts           # Snippet management
+│   ├── users.ts              # User management
+│   ├── schema.ts             # Database schema
+│   └── http.ts               # Webhook handlers
+├── src/
+│   ├── app/                  # Next.js App Router
+│   │   ├── (root)/           # Main editor page
+│   │   ├── pricing/          # Pricing page
+│   │   ├── profile/          # User profile
+│   │   └── snippets/         # Snippet pages
+│   ├── components/           # Shared components
+│   ├── hooks/                # Custom React hooks
+│   ├── store/                # Zustand state management
+│   └── types/                # TypeScript type definitions
+├── public/                   # Static assets
+└── scripts/                  # Build and utility scripts
+```
+
+## 🔧 Configuration
+
+### Supported Languages
+- **JavaScript** (18.15.0) - Free tier
+- **TypeScript** (5.0.3) - Pro tier
+- **Python** (3.10.0) - Pro tier
+- **Java** (15.0.2) - Pro tier
+- **Go** (1.16.2) - Pro tier
+- **Rust** (1.68.2) - Pro tier
+- **C++** (10.2.0) - Pro tier
+- **C#** (6.12.0) - Pro tier
+- **Ruby** (3.0.1) - Pro tier
+- **Swift** (5.3.3) - Pro tier
+
+### Available Themes
+- VS Dark (default)
+- VS Light
+- GitHub Dark
+- Monokai
+- Solarized Dark
+
+## 📚 API Endpoints
+
+**Code Execution:**
+- `POST /api/execute` - Execute code in various languages
+
+**Snippets:**
+- `GET /api/snippets` - Get all public snippets
+- `POST /api/snippets` - Create new snippet
+- `GET /api/snippets/[id]` - Get specific snippet
+- `DELETE /api/snippets/[id]` - Delete snippet
+- `POST /api/snippets/[id]/star` - Star/unstar snippet
+- `POST /api/snippets/[id]/comments` - Add comment
+
+**User Management:**
+- `GET /api/users/[id]` - Get user profile
+- `GET /api/users/[id]/executions` - Get user's code executions
+- `GET /api/users/[id]/stats` - Get user statistics
+
+## 🚀 Deployment
+
+### Frontend (Vercel)
+```bash
+# Build the application
+npm run build
+
+# Deploy to Vercel
+vercel --prod
+```
+
+### Backend (Convex)
+```bash
+# Deploy Convex functions
+npx convex deploy
+```
+
+### Environment Variables
+Make sure to set all required environment variables in your deployment platform.
+
+## 💡 Usage Examples
+
+### Basic Code Execution
+```javascript
+// JavaScript example
+const numbers = [1, 2, 3, 4, 5];
+const squares = numbers.map(n => n * n);
+console.log('Squared numbers:', squares);
+```
+
+### Creating a Snippet
+1. Write your code in the editor
+2. Select your preferred language
+3. Click "Share" to create a public snippet
+4. Add a title and description
+5. Share the generated link with others
+
+### Customizing the Editor
+- Use the theme selector to change the editor appearance
+- Adjust font size using the controls
+- Switch between different programming languages
+- Use keyboard shortcuts for common actions
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+### Development Guidelines
+- Follow TypeScript best practices
+- Use Tailwind CSS for styling
+- Write meaningful commit messages
+- Test your changes thoroughly
+- Update documentation as needed
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+## 🙏 Acknowledgments
+
+- [Monaco Editor](https://microsoft.github.io/monaco-editor/) - Code editor component
+- [Piston API](https://piston.readthedocs.io/) - Code execution engine
+- [Clerk](https://clerk.com/) - Authentication platform
+- [Convex](https://convex.dev/) - Backend platform
+- [Tailwind CSS](https://tailwindcss.com/) - CSS framework
+
+---
+
+**Built with ❤️ using Next.js, Convex, and TypeScript**
